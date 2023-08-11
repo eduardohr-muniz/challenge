@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
+
 class TestController {
   bool isHarshad(int number) {
     if (number > 0) {
-      int initialNumber = 0;
-      while (number > 0) {
-        initialNumber += number % 10;
-        number ~/= 10;
+      String numberString = number.toString();
+      int divisor = 0;
+      for (var c in numberString.characters) {
+        divisor += int.parse(c);
       }
-      return number % initialNumber == 0;
+
+      return (number % divisor) == 0;
     } else {
       return false;
     }
