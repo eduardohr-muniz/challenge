@@ -6,12 +6,16 @@ class TestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Fiz o gerenciamento de estado com valueNotier
+    // mais pra mostrar que conheço de geranciamento de estado
     final controller = TestController();
     final numberHarshadEC = TextEditingController();
     final secondsEC = TextEditingController();
-
+    final encryptEC = TextEditingController();
     var hoursResult = ValueNotifier("");
     var numberHarshad = ValueNotifier(false);
+    var encryptResult = ValueNotifier("");
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Teste Page'),
@@ -52,6 +56,32 @@ class TestPage extends StatelessWidget {
                 valueListenable: hoursResult,
                 builder: (context, hour, _) {
                   return Text(hour);
+                }),
+            TextFormField(
+              controller: encryptEC,
+              decoration: const InputDecoration(label: Text("Exercicio 3")),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      String result = controller.encrypt(encryptEC.text, 3);
+                      encryptResult.value = result;
+                    },
+                    child: const Text("Encrypt")),
+                ElevatedButton(
+                    onPressed: () {
+                      String result = controller.decrypt(encryptEC.text, 3);
+                      encryptResult.value = result;
+                    },
+                    child: const Text("Decrypt")),
+              ],
+            ),
+            ValueListenableBuilder(
+                valueListenable: encryptResult,
+                builder: (context, encrypt, _) {
+                  return Text(encrypt);
                 }),
           ],
         ),
