@@ -31,45 +31,18 @@ class TestController {
     }
   }
 
-  static String encode(String plaintext, int numberOfRows) {
-    var railLength = plaintext.length ~/ numberOfRows + 1;
-    var rails = List.generate(numberOfRows, (_) => StringBuffer());
-    var currentRow = 0;
-    var goingUp = true;
-    for (var i = 0; i < plaintext.length; i++) {
-      rails[currentRow].write(plaintext[i]);
-      if (goingUp) {
-        currentRow++;
-        if (currentRow == numberOfRows) {
-          goingUp = false;
-          currentRow--;
-        }
-      } else {
-        currentRow--;
-        if (currentRow == -1) {
-          goingUp = true;
-          currentRow++;
-        }
-      }
+  String encrypt(String text, int n) {
+    List<String> matriz = List.filled(n, ""); // iniciando a matriz vazia com n espaços vazios
+    int rail = 0;
+    int step = 1;
+    for (int i = 0; i < text.length; i++) {
+      String c = text[i];
+      matriz[rail] = matriz[rail] + c;
+      if (rail == n - 1)
+        step = -1;
+      else if (rail == 0) step = 1;
+      rail += step;
     }
-    return rails.map((r) => r.toString()).join();
-  }
-
-  static String decode(String ciphertext, int numberOfRows) {
-    var railLength = ciphertext.length ~/ numberOfRows + 1;
-    var rails = List.generate(numberOfRows, (_) => StringBuffer());
-    var currentRow = 0;
-    var goingUp = true;
-    for (var i = 0; i < ciphertext.length; i++) {
-      for (var j = 0; j < numberOfRows; j++) {
-        if (ciphertext[i] == rails[j].length) {
-          currentRow = j;
-          goingUp = !goingUp;
-          break;
-        }
-      }
-      rails[currentRow].write(ciphertext[i]);
-    }
-    return rails.map((r) => r.toString()).join();
+    return matriz.join();
   }
 }
