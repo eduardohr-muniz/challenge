@@ -1,15 +1,18 @@
 class TestController {
   bool isHarshad(int number) {
-    int initialNumber = 0;
-    while (number > 0) {
-      initialNumber += number % 10;
-      number ~/= 10;
+    if (number > 0) {
+      int initialNumber = 0;
+      while (number > 0) {
+        initialNumber += number % 10;
+        number ~/= 10;
+      }
+      return number % initialNumber == 0;
+    } else {
+      return false;
     }
-    return number % initialNumber == 0;
   }
 
   String convertSecondsInhours(int seconds) {
-    // 3600
     if (seconds <= 359999) {
       int hours = seconds ~/ 3600;
       int minutes = (seconds % 3600) ~/ 60;
