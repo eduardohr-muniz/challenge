@@ -21,14 +21,14 @@ class TestPage extends StatelessWidget {
         title: const Text('Teste Page'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
             TextFormField(
               controller: numberHarshadEC,
-              decoration: const InputDecoration(label: Text("Exercicio 1")),
+              decoration: const InputDecoration(label: Text("Exercicio 1"), border: OutlineInputBorder()),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             ElevatedButton(
                 onPressed: () {
                   bool result = controller.isHarshad(int.parse(numberHarshadEC.text));
@@ -40,10 +40,10 @@ class TestPage extends StatelessWidget {
                 builder: (context, hour, _) {
                   return Text(hour.toString());
                 }),
-            const Divider(),
+            const SizedBox(height: 50),
             TextFormField(
               controller: secondsEC,
-              decoration: const InputDecoration(label: Text("Exercicio 2")),
+              decoration: const InputDecoration(label: Text("Exercicio 2"), border: OutlineInputBorder()),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -57,12 +57,14 @@ class TestPage extends StatelessWidget {
                 builder: (context, hour, _) {
                   return Text(hour);
                 }),
+            const SizedBox(height: 50),
             TextFormField(
               controller: encryptEC,
-              decoration: const InputDecoration(label: Text("Exercicio 3")),
+              decoration: const InputDecoration(label: Text("Exercicio 3"), border: OutlineInputBorder()),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                     onPressed: () {
